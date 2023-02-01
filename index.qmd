@@ -21,6 +21,10 @@ citation:
 github:
   repo: "schochastics/netVizR"
   binder: true
+format: 
+  html: default
+  pdf: default
+format-links: [pdf]
 ---
 
 
