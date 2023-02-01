@@ -13,6 +13,7 @@ author:
 date: "2022-01-16"
 categories:
   - network visualization
+  - R
 toc: true
 title-block-style: default
 citation:
@@ -20,7 +21,6 @@ citation:
 github:
   repo: "schochastics/netVizR"
   binder: true
-doi: "12345"
 ---
 
 
