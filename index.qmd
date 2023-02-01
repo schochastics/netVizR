@@ -23,7 +23,8 @@ github:
   binder: true
 format: 
   html: default
-  pdf: default
+  pdf: 
+    default-image-extension: "png"
 format-links: [pdf]
 ---
 
@@ -389,7 +390,7 @@ ggraph(gotS1, layout = "stress") +
   scale_size_continuous(range = c(1, 6)) +
   theme_graph() +
   labs(title = "named palette") +
-  theme(legend.position = "none") -> p2
+  theme(legend.position = "none",plot.title = element_text(family = "serif")) -> p2
 
 ggraph(gotS1, layout = "stress") +
   geom_edge_link0(aes(edge_width = weight), edge_colour = "grey66") +
@@ -400,7 +401,7 @@ ggraph(gotS1, layout = "stress") +
   scale_size_continuous(range = c(1, 6)) +
   theme_graph() +
   labs(title = "unnamed palette") +
-  theme(legend.position = "none") -> p1
+  theme(legend.position = "none",plot.title = element_text(family = "serif")) -> p1
 
 p1 + p2
 ```
@@ -445,7 +446,10 @@ ggraph(gotS1, layout = "stress") +
   scale_edge_width_continuous(range = c(0.2, 3)) +
   scale_size_continuous(range = c(1, 6)) +
   theme_graph() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+  	plot.title = element_text(family = "serif"),
+  	legend.text = element_text(family = "serif"),
+  	legend.title = element_text(family = "serif"))
 ```
 
 # Another full example
@@ -486,7 +490,10 @@ ggraph(greys, "stress", bbox = 15) +
   scale_fill_manual(values = c("grey66", "#EEB422", "#424242")) +
   scale_size(range = c(2, 5), guide = "none") +
   theme_graph() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+	plot.title = element_text(family = "serif"),
+  	legend.text = element_text(family = "serif"),
+  	legend.title = element_text(family = "serif"))
 ```
 
 While the coloured edges look kind of artistic, we should go back to the "0" version.
@@ -501,7 +508,10 @@ ggraph(greys, "stress", bbox = 15) +
   scale_fill_manual(values = c("grey66", "#EEB422", "#424242")) +
   scale_size(range = c(2, 5), guide = "none") +
   theme_graph() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+  	plot.title = element_text(family = "serif"),
+  	legend.text = element_text(family = "serif"),
+  	legend.title = element_text(family = "serif"))
 ```
 
 # Code through: Recreate the polblogs viz
@@ -982,8 +992,9 @@ attributes to aesthetics or change appearances globally. One great feature of th
 can adjust the position of nodes individually if you are not satisfied with their location.
 Once you are done, you can either directly export the figure to png or automatically insert the code to produce the figure into your script. That way, you can review the code and hopefully learn something from it. Below if a demo that shows its functionality.
 
-![](https://raw.githubusercontent.com/schochastics/snahelper/master/man/figures/snahelper.gif)
-
+```{r eval = knitr::is_html_output(),echo=FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/schochastics/snahelper/master/man/figures/snahelper.gif")
+```
 
 To use the addin, simply highlight the variable name of your network within an R script and
 choose the SNAhelper from the Addins drop-down menu within RStudio. You can find more about the 
@@ -1163,7 +1174,9 @@ for (i in 1:length(s50)) {
       labels = c("never", "occasionally", "regularly")
     ) +
     theme_graph() +
-    theme(legend.position = "bottom") +
+    theme(legend.position = "bottom",plot.title = element_text(family = "serif"),
+  	legend.text = element_text(family = "serif"),
+  	legend.title = element_text(family = "serif")) +
     labs(title = paste0("Wave ", i))
 }
 
@@ -1266,7 +1279,9 @@ ggplot() +
   theme_void()
 ```
 
-![](s50.gif)
+```{r eval=knitr::is_html_output(),echo=FALSE}
+knitr::include_graphics("s50.gif")
+```
 
 ## Multilevel networks
 
@@ -1453,7 +1468,7 @@ Instead of the default 2D projection, `layout_as_multilevel()` can also return t
 by setting `project2d = FALSE`. The 3D layout can then be used with e.g. `threejs` to produce an interactive
 3D visualization.
 
-```{r threejs_Example, fig.align="center",fig.height=7}
+```{r threejs_Example, eval = knitr::is_html_output(), fig.align="center",fig.height=7}
 library(threejs)
 xyz <- layout_as_multilevel(multilvl_ex,
   type = "separate",
